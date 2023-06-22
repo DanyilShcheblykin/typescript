@@ -4,6 +4,7 @@
 null === null  // true
 
 // сравнивнивает значение и типы 
+// strict equality , compares value and type 
 
 1 == 1        // true
 // 1 == '1'      // true
@@ -11,6 +12,7 @@ null === null  // true
 null == undefined // true
 
 // пытается привести к одному типу 
+// try to make both variables to one type
 
 // -----------------------------------------------
 
@@ -34,4 +36,5 @@ const person:Person = {
   console.log(person?.secondName);//если использовать Optional Chaning не выдаст ошибку а вернет undefined
 
 //   -------------------------------------------------
+
  

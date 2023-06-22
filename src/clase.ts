@@ -6,6 +6,9 @@ class Person {
       this.name = name
       this.job = job
     }
+    static show(){
+      console.log(this.name)
+    }
   }
   
   class Employ extends Person {

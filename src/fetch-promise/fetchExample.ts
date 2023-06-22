@@ -7,6 +7,7 @@ const fetchFunctionGet = async () => {
             'content-type': 'application/json', //обозначает что отправлено в Формате Json
             'Cache-Control': 'max-age=3600'//хранится в cache 1 hour
         },
+        
         cache: "default" // кеширует ответ
     }).then(async (response) => {
         const data = await response.json()
@@ -44,7 +45,6 @@ const fetchFunctionPost = async () => {
 }
 
 // fetchFunctionPost().then(data => console.log(data))
-
 
 // --------------------------------------------------------
 const putBody = {

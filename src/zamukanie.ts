@@ -33,3 +33,9 @@ function bind(context: any, callBack: () => void) {
 }
 
 bind(objMain, show)('mama')
+
+let tyt ={
+    name:"jj",
+    func:()=>{
+    }
+}

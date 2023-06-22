@@ -5,9 +5,9 @@ const createId = () => {
 }
 const incr = createId()
 
-// console.log(incr());
-// console.log(incr());
-// console.log(incr());
+// console.log(incr());//0
+// console.log(incr());//1
+// console.log(incr());//2
 
 // ------------------------------------------
 let map = new Map<string, string>();
@@ -18,7 +18,7 @@ function test(key: string) {
     const v = map.get(key)
 
     if (!v) return
-    console.log('v : ' + v)
+
 }
 
 test('')
@@ -26,10 +26,10 @@ test('')
 // ------------------------------------------
 
 setTimeout(() => { //это macroTask
-    console.log("macroTask")
+
 })
 
-Promise.resolve('data').then(data => console.log("microTask : " + data)) //первое будет это потому что это microTask
+// Promise.resolve('data').then(data => console.log("microTask : " + data)) //первое будет это потому что это microTask
 
 // ------------------------------------------
 
@@ -43,7 +43,7 @@ const newPerson = JSON.stringify(mama)
 
 const onj = { ...JSON.parse(newPerson) }
 
-console.log(newPerson)
+
 
 // ------------------------------------------
 function getNumber(numb: number, numb2: number) {
@@ -55,10 +55,6 @@ function getNumber(numb: number, numb2: number) {
     }
     return numb % 2 && numb !== 1 ? numb2 : numb
 }
-
-console.log(getNumber(2, 2))
-console.log(getNumber(1, 1))
-console.log(getNumber(1, 2))
 
 // ------------------------------------------
 
@@ -104,7 +100,7 @@ function getStringOrNumber(): string | number {
 
 function run(numb: number) { // это не ломает код потому что macroTask не блокируют поток 
     setTimeout(() => {
-        console.log(numb)
+
         run(numb + 1)
     },);
 }
@@ -115,7 +111,8 @@ const p = Promise.resolve();
 
 function run2(numb: number) { //это поломает код потому что microTask мгновенно выполняется 
     p.then(() => {
-        console.log(numb)
+
+
         run2(numb + 1)
     })
 }
@@ -155,7 +152,6 @@ const callBack = (item: number) => {
 }
 const arrReduce = [1, 2, 3, 4]
 
-console.log(mapReduce(arrReduce, callBack))
 
 // ------------------------------------------
 
@@ -168,7 +164,7 @@ const myPromise = new Promise((resolve, reject) => {
 
 const asyncFunc = async (promise: any) => {
     const resp = await promise
-    console.log(promise)
+    // console.log(promise)
 
 }
 
@@ -186,33 +182,29 @@ const sec = () => {
 
 const sumFunc = async () => {
     return Promise.all([fir, sec]).then(([sum1, sum2]) => {
-        console.log(sum1())
+
     })
 }
-
-sumFunc()
 
 // ------------------------------------------------------------
 
 const obj1 = { name: 'mama' }
 const obj22 = obj1
 
-console.log(obj1 === obj22) //true
+// console.log(obj1 === obj22) //true
 
 // ------------------------------------------------------------
 
 const pers = {
     name: "Sasha",
     method() {
-        console.log(this.name)
+        // console.log(this.name)
     }
 }
 
 const someObj = pers
 
 someObj.name = 'Tamila'
-
-
 
 someObj.method()//Tamila
 pers.method()//Tamila
@@ -240,7 +232,7 @@ const returnFewPromise = (prom1: Promise<number>, prom2: Promise<number>): Promi
 
 returnFewPromise(firstPromise, secondPromise).then(data => {
     const sum = data[0] + data[1]
-    console.log(sum)
+
 })
 
 // ------------------------------------------------------------
@@ -278,9 +270,102 @@ const returnAllPromise = (promises: Array<Promise<number>>) => {
     })
 }
 returnAllPromise([fetc1(), fetc2()]).then(data => {
-
-    console.log('data : ' + data)
 })
+
+// ------------------------------------------------------------
+
+const sumFunction = (...arg: Array<number>) => {
+    let sum = 0
+    for (let y of arg) {
+        sum += y
+    }
+
+    const reduceSum = arg.reduce((accum: number, current) => {
+        return accum + current
+    }, 0)
+
+
+}
+
+
+// ------------------------------------------------------------
+
+
+const arrOfObjects = [
+    { a: "aaaa" },
+    { name: "name1" },
+    { b: "vvvv" },
+    { name: "name2" }
+]
+
+const newArr = arrOfObjects.filter((item: Object, index) => {
+    return Object.keys(item)[0] === 'name'
+})
+
+const arrayOfNames = newArr.map((item, index) => item.name)
+
+
+// ------------------------------------------------------------
+
+
+class Pers {
+    name: string
+    constructor(name: string) {
+        this.name = name
+    }
+}
+// ------------------------------------------------------------
+
+
+const isPalidrome = (word: string) => {
+
+    let start = 0
+    let end = word.length - 1
+
+    while (start < end) {
+        const leftChar = word[start]
+        const rightChar = word[end]
+        if (leftChar !== rightChar) {
+            return false
+        }
+        start += 1
+        end -= 1
+    }
+
+    return true
+
+}
+console.log(isPalidrome('mamam'))
+
+// ------------------------------------------------------------
+
+const objnest = {
+    red: {
+        apple: {
+            mama: "hello"
+        }
+    }
+}
+const strNes = 'red.aple.mama'
+
+const getFromNestedObj = (str: string, obj: Object) => {
+
+    const arraykeys = str.split('.')
+
+    let newObj: { [key: string]: any; } = obj;
+
+    for (let y of arraykeys) {
+        if (!newObj.hasOwnProperty(y)) {
+            return undefined
+        }
+        newObj = newObj[y]
+
+    }
+    return newObj
+}
+
+console.log(getFromNestedObj(strNes, objnest))
+
 
 
 

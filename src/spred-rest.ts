@@ -45,3 +45,6 @@ restFunction(1, 2, 3, 5)
 // In general, if the ... operator appears in a function parameter declaration,
 //     it is a rest parameter.If it appears in an array or object literal,
 //         it is a spread operator.
+
+const xx = [1,2]
+const [first , sec3] = xx
